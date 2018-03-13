@@ -35,14 +35,28 @@ class OrarioTableSeeder extends Seeder
             '19:00'
         ];
 
+        $id = 1;
+
         foreach ($giorni as $g) {
             for($i = 0; $i<(count($orari)-1); $i++) {
-                DB::statement($sql, [
-                    'giorno'=> $g,
-                    'ora'=> $orari[$i].' - '.$orari[$i+1],
-                    'attivo'=> 0,
-                    'created_at' => Carbon::now()
-                ]);
+
+                if(($id >= 3 && $id <= 16) || ($id >= 25 && $id <= 32) || ($id >= 47 && $id <= 60) || ($id >= 91 && $id <= 104) || ($id >= 137 && $id <= 148) || ($id >= 201 && $id <= 212)) {
+                    DB::statement($sql, [
+                        'giorno'=> $g,
+                        'ora'=> $orari[$i].' - '.$orari[$i+1],
+                        'attivo'=> 1,
+                        'created_at' => Carbon::now()
+                    ]);
+                } else {
+                    DB::statement($sql, [
+                        'giorno'=> $g,
+                        'ora'=> $orari[$i].' - '.$orari[$i+1],
+                        'attivo'=> 0,
+                        'created_at' => Carbon::now()
+                    ]);
+                }
+
+                $id++;
             }
         }
 
