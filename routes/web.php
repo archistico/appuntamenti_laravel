@@ -11,6 +11,13 @@
 |
 */
 
+use App\Appuntamento;
+
 Route::get('/', function () {
-    return view('welcome');
+    $appuntamenti = Appuntamento::all();
+    return view('welcome', ['appuntamenti' => $appuntamenti]);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
