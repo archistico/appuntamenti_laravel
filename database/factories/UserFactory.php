@@ -1,6 +1,8 @@
 <?php
 
+use App\Orario;
 use Faker\Generator as Faker;
+use Illuminate\Support\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,14 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Appuntamento::class, function (Faker $faker) {
+    return [
+        'data' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null),
+        'orario_id' => Orario::inRandomOrder()->where('attivo', 1)->first()->id,
+        'nome' => $faker->name(),
+        'note' => $faker->text(20),
+        'created_at' => Carbon::now()
+    ];
+});
+

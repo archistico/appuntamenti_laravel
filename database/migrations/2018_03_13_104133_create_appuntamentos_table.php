@@ -13,17 +13,16 @@ class CreateAppuntamentosTable extends Migration
      */
     public function up()
     {
-        /*
-        `idapp` int(11) NOT NULL,
-        `data` date NOT NULL,
-        `fkorario` int(11) NOT NULL,
-        `nome` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-        `note` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '-'
-         */
 
         Schema::create('appuntamentos', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('data');
+            $table->integer('orario_id')->unsigned();
+            $table->string('nome',128);
+            $table->string('note',128)->nullable();
             $table->timestamps();
+
+            $table->foreign('orario_id')->references('id')->on('orarios')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
