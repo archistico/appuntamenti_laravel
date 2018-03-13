@@ -16,7 +16,10 @@
 
                         <ul>
                             @foreach($appuntamenti as $app)
-                                <li>{{$app->nome}}</li>
+                                <h2>{{ $app->nome }}</h2>
+                                <h4>{{ Carbon\Carbon::parse($app->data)->format('d/m/Y') }}</h4>
+                                <p>{{ $app->note }}</p>
+                                <hr>
                             @endforeach
                         </ul>
                     </div>
