@@ -22,7 +22,12 @@ Route::get('/', function () {
         ->get();
 
     return view('welcome', ['appuntamenti' => $appuntamenti]);
-});
+})->name('lista');;
+
+Route::get('/new', function () {
+    return view('new');
+})->name('new');
+
 
 Auth::routes();
 
