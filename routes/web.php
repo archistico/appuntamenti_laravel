@@ -14,7 +14,11 @@
 use App\Appuntamento;
 
 Route::get('/', function () {
-    $appuntamenti = Appuntamento::all();
+    $appuntamenti = DB::table('appuntamentos')
+        ->join('orarios', 'orarios.id', '=', 'appuntamentos.orario_id')
+        ->select('appuntamentos.*', 'orarios.ora as ora', 'orarios.giorno as giorno')
+        ->get();
+
     return view('welcome', ['appuntamenti' => $appuntamenti]);
 });
 

@@ -17,7 +17,7 @@
                         <ul>
                             @foreach($appuntamenti as $app)
                                 <h2>{{ $app->nome }}</h2>
-                                <h4>{{ Carbon\Carbon::parse($app->data)->format('d/m/Y') }}</h4>
+                                <h4>{{ $app->giorno }} | {{ Carbon\Carbon::parse($app->data)->format('d/m/Y') }} | {{ $app->ora }}</h4>
                                 <p>{{ $app->note }}</p>
                                 <hr>
                             @endforeach
