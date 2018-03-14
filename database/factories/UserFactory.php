@@ -25,13 +25,20 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 
 $factory->define(App\Appuntamento::class, function (Faker $faker) {
-    $data = $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null);
-    $NumberDayOfWeek = $data->format('w');
-    $days = array('dom', 'lun', 'mar', 'mer','gio','ven', 'sab');
-    $dayOfWeek = $days[$NumberDayOfWeek];
+
+    // Attenzione posso tirare a caso una data che non ha appuntamenti disponibili
+    do {
+        $data = $faker->dateTimeBetween($startDate = '-1 months', $endDate = 'now', $timezone = null);
+        $NumberDayOfWeek = $data->format('w');
+        $days = array('dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab');
+        $dayOfWeek = $days[$NumberDayOfWeek];
+    } while ($NumberDayOfWeek < 1 || $NumberDayOfWeek > 5);
+
+    $orario_id = Orario::inRandomOrder()->where('attivo', 1)->where('giorno', $dayOfWeek)->first()->id;
+
     return [
         'data' => $data,
-        'orario_id' => Orario::inRandomOrder()->where('attivo', 1)->where('giorno', 'lun')->first()->id,
+        'orario_id' => $orario_id,
         'nome' => $faker->name(),
         'note' => $faker->text(20),
         'created_at' => Carbon::now()
