@@ -17,6 +17,7 @@ Route::get('/', function () {
     $appuntamenti = DB::table('appuntamentos')
         ->join('orarios', 'orarios.id', '=', 'appuntamentos.orario_id')
         ->select('appuntamentos.*', 'orarios.ora as ora', 'orarios.giorno as giorno')
+        ->orderBy('data', 'ASC')
         ->get();
 
     return view('welcome', ['appuntamenti' => $appuntamenti]);

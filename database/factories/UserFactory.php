@@ -28,7 +28,7 @@ $factory->define(App\Appuntamento::class, function (Faker $faker) {
 
     // Attenzione posso tirare a caso una data che non ha appuntamenti disponibili
     do {
-        $data = $faker->dateTimeBetween($startDate = '-1 months', $endDate = 'now', $timezone = null);
+        $data = $faker->dateTimeBetween($startDate = '-14 days', $endDate = 'now', $timezone = null);
         $NumberDayOfWeek = $data->format('w');
         $days = array('dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab');
         $dayOfWeek = $days[$NumberDayOfWeek];
