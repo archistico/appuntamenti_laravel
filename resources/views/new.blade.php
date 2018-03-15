@@ -17,16 +17,22 @@
                             <form>
                                 <div class="form-group">
                                     <label for="data">Data</label>
-                                    <input type="text" class="form-control" name="data" id="datepicker">
+                                    <input type="text" class="form-control" name="data" id="datepicker" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <label for="nome">Nome mutuato</label>
+                                    <input type="text" class="form-control" id="nome" aria-describedby="nome" placeholder="Scrivi cognome e nome" name="nome" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Example select</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
+                                    <label for="note">Note</label>
+                                    <input type="text" class="form-control" id="note" aria-describedby="note" placeholder="Note aggiuntive (opzionale)" name="note">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="orario">Orario</label>
+                                    <select class="form-control" id="orario" name="orario" required>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -46,6 +52,7 @@
 
 @section('script')
     <script>
+
         !function(a){a.fn.datepicker.dates.it={days:["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"],daysShort:["Dom","Lun","Mar","Mer","Gio","Ven","Sab"],daysMin:["Do","Lu","Ma","Me","Gi","Ve","Sa"],months:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],monthsShort:["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],today:"Oggi",monthsTitle:"Mesi",clear:"Cancella",weekStart:1,format:"dd/mm/yyyy"}}(jQuery);
         $('#datepicker').datepicker({
             format: "dd-mm-yyyy",
@@ -54,5 +61,18 @@
             autoclose: true,
             todayHighlight: true
         });
+        oggi = new Date();
+        giorno = oggi.getDate();
+        if(giorno<10) {
+            giorno ='0'+giorno;
+        }
+        mese = oggi.getMonth()+1;
+        if(mese<10) {
+            mese ='0'+mese;
+        }
+        data = giorno+'-'+mese+'-'+oggi.getFullYear()
+        $('#datepicker').val(data);
+
+        // Ogni volta che cambio la data devo caricare il select con i dati di appuntamenti e orari in base al giorno della settimana e appuntamenti già presi
     </script>
 @endsection
