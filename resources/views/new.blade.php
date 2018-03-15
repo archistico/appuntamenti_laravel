@@ -74,5 +74,16 @@
         $('#datepicker').val(data);
 
         // Ogni volta che cambio la data devo caricare il select con i dati di appuntamenti e orari in base al giorno della settimana e appuntamenti già presi
+        $('#datepicker').on('change',function(e){
+            var dataSelezionata = 'data='+$('#datepicker').val();
+            $.ajax({
+                type: "GET",
+                url : "{{url('ajax')}}",
+                data : dataSelezionata,
+                success : function(data){
+                    console.log(data);
+                }
+            });
+        });
     </script>
 @endsection

@@ -30,5 +30,10 @@ Route::get('/new', function () {
 
 Route::get('/show/{id}', 'AppuntamentoController@show' )->name('show');
 
+Route::get( '/ajax', [
+    'as' => 'ajax',
+    'uses' => 'TeachController@get_teach'
+]);
+
 Auth::routes();
 
