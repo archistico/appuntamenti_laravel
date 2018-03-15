@@ -31,9 +31,15 @@
                                         }
                                     @endphp
                                 <li>
+                                    <div class="float-right">
+                                        <a class="btn btn-outline-info btn-sm" href="{{ route('show', ['id' => $app->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
+                                        <a class="btn btn-outline-info btn-sm" href="{{ route('show', ['id' => $app->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                     <h4><span class="text-secondary">{{ $app->ora }}</span> <strong>{{ $app->nome }}</strong></h4>
                                     <p><em>{{ $app->note }}</em></p>
-                                    <a class="btn btn-outline-danger btn-sm" href="">X</a>
+
                                     <hr>
                                 </li>
                             @endforeach

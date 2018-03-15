@@ -28,7 +28,7 @@ Route::get('/new', function () {
     return view('new');
 })->name('new');
 
-Route::get('/show/{id}', 'AppuntamentoController@show' );
+Route::get('/show/{id}', 'AppuntamentoController@show' )->name('show');
 
 Auth::routes();
 
