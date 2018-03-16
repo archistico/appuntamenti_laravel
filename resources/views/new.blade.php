@@ -56,6 +56,45 @@
             autoclose: true,
             todayHighlight: true
         });
+
+        function load() {
+            var dataSelezionata = 'data='+$('#datepicker').val();
+            $.ajax({
+                type: "GET",
+                url : "{{url('ajax')}}",
+                data : dataSelezionata,
+                success : function(data){
+                    $("#orario").empty();
+                    if (data.response != '')
+                    {
+                        array = data.response;
+                        array.forEach(function(element) {
+                            if(element.attivo==0) {
+                                if(element.disponibile==1) {
+                                    $("#orario").append("<option class='text-danger' value='"+element.id+"'>"+element.ora+"</option>");
+                                } else {
+                                    $("#orario").append("<option disabled class='text-muted' value='"+element.id+"'>"+element.ora+"</option>");
+                                }
+                            } else {
+                                if(element.disponibile==1) {
+                                    $("#orario").append("<option class='text-dark' value='"+element.id+"'>"+element.ora+"</option>");
+                                } else {
+                                    $("#orario").append("<option disabled class='text-muted' value='"+element.id+"'>"+element.ora+"</option>");
+                                }
+
+                            }
+
+                        });
+                    }
+                }
+            });
+        }
+
+        // Ogni volta che cambio la data devo caricare il select con i dati di appuntamenti e orari in base al giorno della settimana e appuntamenti già presi
+        $('#datepicker').on('change',function(e){
+            load();
+        });
+
         oggi = new Date();
         giorno = oggi.getDate();
         if(giorno<10) {
@@ -67,24 +106,6 @@
         }
         data = giorno+'-'+mese+'-'+oggi.getFullYear()
         $('#datepicker').val(data);
-
-        // Ogni volta che cambio la data devo caricare il select con i dati di appuntamenti e orari in base al giorno della settimana e appuntamenti già presi
-        $('#datepicker').on('change',function(e){
-            var dataSelezionata = 'data='+$('#datepicker').val();
-            $.ajax({
-                type: "GET",
-                url : "{{url('ajax')}}",
-                data : dataSelezionata,
-                success : function(data){
-                    if (data.response != '')
-                    {
-                        array = data.response;
-                        array.forEach(function(element) {
-                            $("#orario").append("<option value='"+element.id+"'>"+element.ora+"</option>");
-                        });
-                    }
-                }
-            });
-        });
+        load();
     </script>
 @endsection
