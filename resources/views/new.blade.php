@@ -14,7 +14,8 @@
                             </div>
                         @endif
 
-                        <form>
+                        <form method="POST">
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="data">Data</label>
                                 <input type="text" class="form-control" name="data" id="datepicker" required>
@@ -58,13 +59,13 @@
         });
 
         function load() {
+            $("#orario").empty();
             var dataSelezionata = 'data='+$('#datepicker').val();
             $.ajax({
                 type: "GET",
                 url : "{{url('ajax')}}",
                 data : dataSelezionata,
                 success : function(data){
-                    $("#orario").empty();
                     if (data.response != '')
                     {
                         array = data.response;

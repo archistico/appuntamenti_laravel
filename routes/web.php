@@ -28,7 +28,10 @@ Route::get('/new', function () {
     return view('new');
 })->name('new');
 
+Route::post('/new', 'AppuntamentoController@add' );
+
 Route::get('/show/{id}', 'AppuntamentoController@show' )->name('show');
+Route::get('/delete/{id}', 'AppuntamentoController@delete' )->name('delete');
 
 Route::get( '/ajax', [
     'as' => 'ajax',
