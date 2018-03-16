@@ -32,7 +32,7 @@
                                     @endphp
                                 <li>
                                     <div class="float-right">
-                                        <a class="btn btn-outline-info btn-sm" href="{{ route('show', ['id' => $app->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <a class="btn btn-outline-info btn-sm" href="{{ route('edit', ['id' => $app->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
                                         <a class="btn btn-outline-info btn-sm" href="{{ route('delete', ['id' => $app->id]) }}"><i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </a>

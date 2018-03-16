@@ -44,4 +44,29 @@ class AppuntamentoController extends Controller
 
         return Redirect::route('lista');
     }
+
+    public function edit($id) {
+        $app = Appuntamento::find($id);
+        $giorno = Carbon::parse($app->data)->format('d-m-Y');
+        $nome = $app->nome;
+        $note = $app->note;
+        $orario_id = $app->orario_id;
+        return view('edit', ['giorno' => $giorno, 'nome' => $nome, 'note' => $note, 'orario_id' => $orario_id]);
+    }
+
+    public function update($id, Request $request) {
+        $data = $request->input('data');
+        $nome = $request->input('nome');
+        $note = $request->input('note');
+        $orario_id = $request->input('orario');
+
+        $app = Appuntamento::find($id);
+        $app->data = Carbon::parse($data)->format('Y-m-d');
+        $app->nome = $nome;
+        $app->note = $note;
+        $app->orario_id = $orario_id;
+        $app->save();
+
+        return Redirect::route('lista');
+    }
 }

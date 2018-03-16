@@ -32,6 +32,8 @@ Route::post('/new', 'AppuntamentoController@add' );
 
 Route::get('/show/{id}', 'AppuntamentoController@show' )->name('show');
 Route::get('/delete/{id}', 'AppuntamentoController@delete' )->name('delete');
+Route::get('/edit/{id}', 'AppuntamentoController@edit' )->name('edit');
+Route::post('/edit/{id}', 'AppuntamentoController@update' );
 
 Route::get( '/ajax', [
     'as' => 'ajax',
