@@ -14,35 +14,30 @@
                             </div>
                         @endif
 
-                            <form>
-                                <div class="form-group">
-                                    <label for="data">Data</label>
-                                    <input type="text" class="form-control" name="data" id="datepicker" required>
-                                </div>
+                        <form>
+                            <div class="form-group">
+                                <label for="data">Data</label>
+                                <input type="text" class="form-control" name="data" id="datepicker" required>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="nome">Nome mutuato</label>
-                                    <input type="text" class="form-control" id="nome" aria-describedby="nome" placeholder="Scrivi cognome e nome" name="nome" required>
-                                </div>
+                            <div class="form-group">
+                                <label for="nome">Nome mutuato</label>
+                                <input type="text" class="form-control" id="nome" aria-describedby="nome" placeholder="Scrivi cognome e nome" name="nome" required>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="note">Note</label>
-                                    <input type="text" class="form-control" id="note" aria-describedby="note" placeholder="Note aggiuntive (opzionale)" name="note">
-                                </div>
+                            <div class="form-group">
+                                <label for="note">Note</label>
+                                <input type="text" class="form-control" id="note" aria-describedby="note" placeholder="Note aggiuntive (opzionale)" name="note">
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="orario">Orario</label>
-                                    <select class="form-control" id="orario" name="orario" required>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label for="orario">Orario</label>
+                                <select class="form-control" id="orario" name="orario" required>
+                                </select>
+                            </div>
 
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </form>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -81,7 +76,13 @@
                 url : "{{url('ajax')}}",
                 data : dataSelezionata,
                 success : function(data){
-                    console.log(data);
+                    if (data.response != '')
+                    {
+                        array = data.response;
+                        array.forEach(function(element) {
+                            $("#orario").append("<option value='"+element.id+"'>"+element.ora+"</option>");
+                        });
+                    }
                 }
             });
         });
