@@ -37,7 +37,7 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block">Inserisci</button>
                         </form>
                     </div>
                 </div>
