@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Redirect;
 
 class AppuntamentoController extends Controller
 {
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id) {
 
         $appuntamenti = DB::table('appuntamentos')
@@ -21,6 +25,10 @@ class AppuntamentoController extends Controller
         return view('show', ['appuntamenti' => $appuntamenti]);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function add(Request $request) {
         $data = $request->input('data');
         $nome = $request->input('nome');
