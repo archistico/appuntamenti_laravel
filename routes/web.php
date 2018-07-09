@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/edit/{id}', 'AppuntamentoController@edit' )->name('edit');
     Route::post('/edit/{id}', 'AppuntamentoController@update' );
 
+    Route::get('/home', 'AppuntamentoController@home')->name('home');
+
     Route::get( '/ajax', [
         'as' => 'ajax',
         'uses' => 'TeachController@get_teach'

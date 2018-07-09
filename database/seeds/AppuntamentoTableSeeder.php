@@ -16,6 +16,6 @@ class AppuntamentoTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Appuntamento::truncate();
 
-        factory(Appuntamento::class, 25)->create();
+        factory(Appuntamento::class, 50)->create();
     }
 }

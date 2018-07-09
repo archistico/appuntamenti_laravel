@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Appuntamento;
 use Illuminate\Support\Carbon;
 use DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Collection;
 
 class AppuntamentoController extends Controller
 {
@@ -76,5 +78,30 @@ class AppuntamentoController extends Controller
         $app->save();
 
         return Redirect::route('lista');
+    }
+
+    public function home(Request $request) {
+        /*
+        $appuntamenti = DB::table('appuntamentos')
+            ->select('data', 'orario_id')
+            ->groupBy('data', 'orario_id')
+            ->havingRaw('COUNT(*) > 1')
+                ->get();
+        */
+        $apps = Appuntamento::orderBy('data', 'asc')->orderBy('orario_id', 'asc')->get();
+
+        $appuntamenti = new Collection;
+
+        foreach($apps as $app1) {
+            foreach($apps as $app2) {
+                if(($app1->data == $app2->data) && ($app1->orario_id == $app2->orario_id) && ($app1->id != $app2->id)) {
+                    $appuntamenti->push($app1);
+                }
+            }
+        }
+
+        //dd($appuntamenti);
+
+        return view('home', ['appuntamenti' => $appuntamenti]);
     }
 }
